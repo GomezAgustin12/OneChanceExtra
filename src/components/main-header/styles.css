@@ -1,3 +1,19 @@
-.site-layout .site-layout-background {
+.site-layout .header {
   background: #fff;
+  height: 80px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+}
+
+.logo {
+  width: '33%';
+  display: 'grid';
+  /* place-items: 'center';   */
+}
+
+.filter {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
 }
