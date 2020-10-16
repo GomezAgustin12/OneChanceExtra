@@ -6,6 +6,9 @@ import AppRoutes from './Routes';
 import 'antd/dist/antd.css';
 
 function App() {
+
+  console.log("Hola")
+
   return (
     <Provider store={store}>
       <AppRoutes />
