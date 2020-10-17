@@ -6,7 +6,7 @@ import AppLayout from './views/layout';
 
 // import { getUser } from '../data/user/actions';
 import { Loader } from './components';
-import Home from './views/home';
+import {Home, Login} from './views';
 
 // import { AdminHome, Clients } from '../views/admin-views';
 // import { UserHome } from '../views/user-views';
@@ -14,12 +14,29 @@ import Home from './views/home';
 
 const AppRoutes = () => {
   const isAdmin = true; //HAY QUE SACAR ESTA VARIABLE CUANDO SE IMPLEMENTE EL MANEJO DE ROLES
+  const user = true
 
   return (
     <Router>
-      <AppLayout>
-        <Route exact path='/' component={Home} />
-      </AppLayout>
+			<Suspense fallback={<Loader />}>
+				{!user ? (
+					<>
+						<Route exact path="/" component={Login} />
+						<Route exact path="/register" component={Register} />
+					</>
+				) : (
+					<AppLayout>
+						{role === 'admin' ? (
+							<>
+								<Route exact path="/" component={Appointments} />
+								<Route exact path="/patients" component={Patients} />
+							</>
+						) : (
+							<Route exact path="/" component={Details} />
+						)}
+					</AppLayout>
+				)}
+			</Suspense>
     </Router>
   );
 };

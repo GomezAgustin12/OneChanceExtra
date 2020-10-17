@@ -1,0 +1,37 @@
+h2 {
+	border: 1px solid black;
+	border-radius: 1px;
+	margin: 2px;
+}
+.login-page-container {
+	height: calc(100vh - 40px);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.login-form-container {
+	width: 50%;
+}
+
+.login-form {
+	margin: 10px 10px 50px 10px;
+	padding: 20px;
+	text-align: center;
+}
+
+.login-social {
+	margin: 10px 10px 50px 10px;
+}
+
+@media screen and (max-width: 425px) {
+	.login-form {
+		width: 80%;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.login-form {
+		width: 70%;
+	}
+}
