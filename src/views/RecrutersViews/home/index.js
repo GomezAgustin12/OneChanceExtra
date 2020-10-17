@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Home = () => {
-  return <h1>Soy un Administrador</h1>;
+const RecruterHome = () => {
+  return <h1>Soy un Recruter</h1>;
 };
 
-export default Home;
+export default RecruterHome;
