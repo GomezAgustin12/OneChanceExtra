@@ -13,7 +13,7 @@ h2 {
 .login-form-container {
   display: flex;
   justify-content: center;
-  width: 50%;
+  width: 80%;
 }
 
 .login-form {

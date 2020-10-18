@@ -3,7 +3,7 @@ import {
   FETCH_USERS_SUCCESS,
   FETCH_USERS_FAILURE,
   LOGOUT,
-} from "./userTypes";
+} from './userTypes';
 
 const initialState = {
   loading: false,

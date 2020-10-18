@@ -1,10 +1,15 @@
 import React from 'react';
-import { Form, Input, Button, Checkbox, Card, Layout } from 'antd';
+import { Form, Input, Button, Card, Layout } from 'antd';
 import './styles.css';
-import logo from "../../assets/OneChance.png";
-import { useSelector, useDispatch } from 'react-redux'
-import { fetchUsersRequest, fetchUsersSuccess, fetchUsersFailure } from "../../redux";
-import { fetchUsers } from "../../api";
+import logo from '../../assets/OneChance.png';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  fetchUsersRequest,
+  fetchUsersSuccess,
+  fetchUsersFailure,
+} from '../../redux';
+import { login } from '../../api';
+import { Loader } from '../../components';
 
 const { Content } = Layout;
 
@@ -17,37 +22,30 @@ const tailLayout = {
 };
 
 const Login = () => {
-  const onFinish = values => {
-    console.log('Success:', values);
+  const onFinish = async values => {
+    try {
+      dispatch(fetchUsersRequest());
+      const res = await login(values);
+      dispatch(fetchUsersSuccess(res));
+    } catch (error) {
+      dispatch(fetchUsersFailure());
+    }
   };
-  
-  const dispatch = useDispatch()
-  
-  const { loading } = useSelector(state => state.user)
 
-
+  const dispatch = useDispatch();
+  const { loading } = useSelector(state => state.user);
 
   const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);
   };
 
-  const onSubmit = async () => {
-    try {
-      dispatch(fetchUsersRequest())
-      const res = await fetchUsers()
-      dispatch(fetchUsersSuccess(res))
-    } catch (error) {
-      dispatch(fetchUsersFailure())
-    }
-  }
-
   return (
-    <Content className="login-page-container">
-      {loading && <h1>CARGANDO</h1>}
-      <Card className="login-form-container">
-      <div className='login-logo'>
-        <img src={logo} alt='logo'  />
-      </div>
+    <Content className='login-page-container'>
+      {loading && <Loader />}
+      <Card className='login-form-container'>
+        <div className='login-logo'>
+          <img src={logo} alt='logo' />
+        </div>
         <Form
           {...layout}
           name='basic'
@@ -58,27 +56,24 @@ const Login = () => {
           <Form.Item
             label='Username'
             name='username'
-            // rules={[{ required: true, message: 'Please input your username!' }]}
+            rules={[{ required: true, message: 'Please input your username!' }]}
           >
             <Input />
           </Form.Item>
-
           <Form.Item
             label='Password'
             name='password'
-            // rules={[{ required: true, message: 'Please input your password!' }]}
+            rules={[{ required: true, message: 'Please input your password!' }]}
           >
             <Input.Password />
           </Form.Item>
-
-          <Form.Item {...tailLayout} name='remember' valuePropName='checked'>
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
-
           <Form.Item {...tailLayout}>
-            <Button type='primary' htmlType='submit' onClick={onSubmit}>
+            <Button type='primary' htmlType='submit'>
               Submit
             </Button>
+            <a href='/register' style={{ marginLeft: '15px' }}>
+              Registrarme
+            </a>
           </Form.Item>
         </Form>
       </Card>
