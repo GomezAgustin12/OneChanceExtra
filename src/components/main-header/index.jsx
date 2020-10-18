@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Layout, Select } from 'antd';
 import './styles.css';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/OneChance.png';
 import { Input } from 'antd';
 
 const { Header } = Layout;

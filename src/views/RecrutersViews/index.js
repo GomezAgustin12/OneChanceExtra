@@ -1,0 +1,1 @@
+export { default as RecruterHome } from './home'

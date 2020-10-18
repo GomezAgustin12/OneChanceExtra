@@ -6,7 +6,7 @@ import { MainFooter, MainHeader, PageContent, SideBar } from '../../components';
 const AppLayout = props => {
   return (
     <Layout className={'site-layout'}>
-      <SideBar />
+      {/* <SideBar /> */}
       <Layout>
         <MainHeader className={'header'} />
         <PageContent className={'pageContent'}>{props.children}</PageContent>

@@ -1,25 +1,38 @@
-import React, { Suspense, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { Suspense } from 'react';
+import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import AppLayout from './views/layout';
-
-// import { getUser } from '../data/user/actions';
 import { Loader } from './components';
-import Home from './views/home';
-
-// import { AdminHome, Clients } from '../views/admin-views';
-// import { UserHome } from '../views/user-views';
-// import { Register, Login } from '../views';
+import { Login, Register } from './views';
+import { RecruterHome } from './views/RecrutersViews';
+import { StudentHome } from './views/StudentsViews';
 
 const AppRoutes = () => {
-  const isAdmin = true; //HAY QUE SACAR ESTA VARIABLE CUANDO SE IMPLEMENTE EL MANEJO DE ROLES
+  const { isLogin } = useSelector(state => state.user);
+  const role = 'student';
 
   return (
     <Router>
-      <AppLayout>
-        <Route exact path='/' component={Home} />
-      </AppLayout>
+      <Suspense fallback={<Loader />}>
+        {!isLogin ? (
+          <>
+            <Route exact path='/' component={Login} />
+            <Route exact path='/register' component={Register} />
+            <Route exact path='/register#1' component={Register} />
+          </>
+        ) : (
+          <AppLayout>
+            {role === 'recruter' ? (
+              <>
+                <Route exact path='/' component={RecruterHome} />
+              </>
+            ) : (
+              <Route exact path='/' component={StudentHome} />
+            )}
+          </AppLayout>
+        )}
+      </Suspense>
     </Router>
   );
 };
