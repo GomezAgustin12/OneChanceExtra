@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import AppLayout from './views/layout';
 import { Loader } from './components';
-import { Login, Register } from './views';
-import { RecruterHome } from './views/RecrutersViews';
+import { Login, Register, Registerrecruiter, RegisterStudent } from './views';
+import { recruiterHome } from './views/recruitersViews';
 import { StudentHome } from './views/StudentsViews';
 
 const AppRoutes = () => {
@@ -18,14 +18,18 @@ const AppRoutes = () => {
         {!isLogin ? (
           <>
             <Route exact path='/' component={Login} />
-            <Route exact path='/register' component={Register} />
-            <Route exact path='/register#1' component={Register} />
+            <Route exact path='/registerStudent' component={RegisterStudent} />
+            <Route
+              exact
+              path='/registerrecruiter'
+              component={Registerrecruiter}
+            />
           </>
         ) : (
           <AppLayout>
-            {role === 'recruter' ? (
+            {role === 'recruiter' ? (
               <>
-                <Route exact path='/' component={RecruterHome} />
+                <Route exact path='/' component={recruiterHome} />
               </>
             ) : (
               <Route exact path='/' component={StudentHome} />

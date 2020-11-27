@@ -3,6 +3,8 @@ import { url } from '../const';
 import jwt_decode from 'jwt-decode';
 
 export const login = async data => {
+
+
   var response = await axios.post(`${url}/auth/local`, {
     identifier: data.username,
     password: data.password,

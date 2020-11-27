@@ -3,6 +3,7 @@ import {
   FETCH_USERS_SUCCESS,
   FETCH_USERS_FAILURE,
   LOGOUT,
+  LOGEDIN,
 } from './userTypes';
 
 const initialState = {
@@ -33,8 +34,15 @@ const reducer = (state = initialState, action) => {
         isLogin: false,
       };
     case LOGOUT:
+      localStorage.clear();
       return {
         user: {},
+      };
+    case LOGEDIN:
+      return {
+        // loading: false,
+        isLogin: true,
+        user: action.user || initialState.user,
       };
     default:
       return state;

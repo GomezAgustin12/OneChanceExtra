@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Input, Button, Card, Layout } from 'antd';
 import './styles.css';
 import logo from '../../assets/OneChance.png';
@@ -8,7 +8,7 @@ import {
   fetchUsersSuccess,
   fetchUsersFailure,
 } from '../../redux';
-import { login } from '../../api';
+import { login, fetchStudents } from '../../api';
 import { Loader } from '../../components';
 
 const { Content } = Layout;
@@ -31,6 +31,10 @@ const Login = () => {
       dispatch(fetchUsersFailure());
     }
   };
+
+  useEffect(() => {
+    fetchStudents().then(res => console.log(res));
+  });
 
   const dispatch = useDispatch();
   const { loading } = useSelector(state => state.user);
@@ -56,14 +60,18 @@ const Login = () => {
           <Form.Item
             label='Username'
             name='username'
-            rules={[{ required: true, message: 'Please input your username!' }]}
+            rules={[
+              { required: true, message: 'Por favor ingrese su usuario!' },
+            ]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             label='Password'
             name='password'
-            rules={[{ required: true, message: 'Please input your password!' }]}
+            rules={[
+              { required: true, message: 'Por favor ingrese su contraseña!' },
+            ]}
           >
             <Input.Password />
           </Form.Item>
@@ -71,9 +79,11 @@ const Login = () => {
             <Button type='primary' htmlType='submit'>
               Submit
             </Button>
-            <a href='/register' style={{ marginLeft: '15px' }}>
-              Registrarme
-            </a>
+            <div className='to-register'>
+              <a href='/registerStudent'>Registrarme como estudiante</a>
+              <br />
+              <a href='/registerrecruiter'>Registrarme como recruiter</a>
+            </div>
           </Form.Item>
         </Form>
       </Card>
