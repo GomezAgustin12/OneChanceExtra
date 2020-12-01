@@ -1,19 +1,24 @@
 import axios from 'axios';
 import { url } from '../const';
-import jwt_decode from 'jwt-decode';
 
 export const login = async data => {
-
-
   var response = await axios.post(`${url}/auth/local`, {
     identifier: data.username,
     password: data.password,
   });
-  console.log(response.data);
   localStorage.setItem('token', response.data.jwt);
+  let res = {};
 
-  const payload = jwt_decode(response.data.jwt);
-  return { ...payload, token: response.data.jwt };
+  if (response.data.user.AppRole === 'student') {
+    res = await axios.get(
+      `${url}/estudiantes?user.id=${response.data.user._id}`
+    );
+  }
+  if (response.data.user.AppRole === 'recruiter') {
+    res = await axios.get(`${url}/recluters?user.id=${response.data.user._id}`);
+  }
+
+  return res.data[0];
 };
 
 export const verifyUser = async token => {

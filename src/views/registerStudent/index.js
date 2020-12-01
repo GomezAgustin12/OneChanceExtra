@@ -35,7 +35,7 @@ const RegisterStudent = () => {
         username: values.username,
         email: values.email,
         password: values.password,
-        AppRol: 'student',
+        AppRole: 'student',
       });
       await postStudent({
         Facultad: values.university,

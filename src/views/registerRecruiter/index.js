@@ -35,6 +35,7 @@ const Registerrecruiter = () => {
         username: values.username,
         email: values.email,
         password: values.password,
+        AppRole: 'recruiter',
       });
       await postRecruiter({ empresa: values.company, user: user.id });
     } catch (error) {

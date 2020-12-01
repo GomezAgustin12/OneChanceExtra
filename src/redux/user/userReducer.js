@@ -8,7 +8,9 @@ import {
 
 const initialState = {
   loading: false,
-  user: {},
+  user: {
+    AppRole: '',
+  },
   isLogin: false,
   error: false,
 };
@@ -23,12 +25,14 @@ const reducer = (state = initialState, action) => {
       };
     case FETCH_USERS_SUCCESS:
       return {
+        ...state,
         loading: false,
         user: action.payload || initialState.user,
         isLogin: true,
       };
     case FETCH_USERS_FAILURE:
       return {
+        ...state,
         loading: false,
         error: true,
         isLogin: false,
@@ -36,11 +40,18 @@ const reducer = (state = initialState, action) => {
     case LOGOUT:
       localStorage.clear();
       return {
-        user: {},
+        ...state,
+        loading: false,
+        user: {
+          AppRole: '',
+        },
+        isLogin: false,
+        error: false,
       };
     case LOGEDIN:
       return {
-        // loading: false,
+        ...state,
+        loading: false,
         isLogin: true,
         user: action.user || initialState.user,
       };

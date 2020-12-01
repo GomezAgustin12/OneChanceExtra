@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Form, Input, Button, Card, Layout } from 'antd';
 import './styles.css';
 import logo from '../../assets/OneChance.png';
@@ -8,7 +8,7 @@ import {
   fetchUsersSuccess,
   fetchUsersFailure,
 } from '../../redux';
-import { login, fetchStudents } from '../../api';
+import { login } from '../../api';
 import { Loader } from '../../components';
 
 const { Content } = Layout;
@@ -32,10 +32,6 @@ const Login = () => {
     }
   };
 
-  useEffect(() => {
-    fetchStudents().then(res => console.log(res));
-  });
-
   const dispatch = useDispatch();
   const { loading } = useSelector(state => state.user);
 
@@ -46,6 +42,7 @@ const Login = () => {
   return (
     <Content className='login-page-container'>
       {loading && <Loader />}
+
       <Card className='login-form-container'>
         <div className='login-logo'>
           <img src={logo} alt='logo' />

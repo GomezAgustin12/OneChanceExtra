@@ -1,13 +1,16 @@
 import React from 'react';
+import {useDispatch} from 'react-redux'
 import { Button, Layout, Select } from 'antd';
 import './styles.css';
 import logo from '../../assets/OneChance.png';
 import { Input } from 'antd';
+import { logout } from '../../redux';
 
 const { Header } = Layout;
 const { Option } = Select;
 
 const MainHeader = () => {
+  const dispatch = useDispatch()
   return (
     <Header className='header'>
       <div className='logo'>
@@ -28,11 +31,13 @@ const MainHeader = () => {
         style={{
           display: 'flex',
           justifyContent: 'space-around',
-          width: '33%',
+          width: '90%',
         }}
       >
         <h1>Menu</h1>
         <h1>Menu</h1>
+        {/* <h1 onClick={dispatch(logout())}>Cerrar Sesion</h1> */}
+        <Button className="logout" onClick={()=> dispatch(logout())}>Cerrar Session</Button>
       </div>
     </Header>
   );
