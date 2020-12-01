@@ -3,6 +3,7 @@ import {
   FETCH_USERS_SUCCESS,
   FETCH_USERS_FAILURE,
   LOGOUT,
+  LOGEDIN
 } from "./userTypes";
 
 export const fetchUsersRequest = () => {
@@ -25,9 +26,15 @@ export const fetchUsersFailure = error => {
   };
 };
 
+export const logedin = user => {
+  return {
+    type: LOGEDIN,
+    user: user,
+  };
+};
+
 export const logout = () => {
   return {
     type: LOGOUT,
   };
 };
-

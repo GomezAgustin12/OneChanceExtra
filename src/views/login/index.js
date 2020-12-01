@@ -42,6 +42,7 @@ const Login = () => {
   return (
     <Content className='login-page-container'>
       {loading && <Loader />}
+
       <Card className='login-form-container'>
         <div className='login-logo'>
           <img src={logo} alt='logo' />
@@ -56,14 +57,18 @@ const Login = () => {
           <Form.Item
             label='Username'
             name='username'
-            rules={[{ required: true, message: 'Please input your username!' }]}
+            rules={[
+              { required: true, message: 'Por favor ingrese su usuario!' },
+            ]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             label='Password'
             name='password'
-            rules={[{ required: true, message: 'Please input your password!' }]}
+            rules={[
+              { required: true, message: 'Por favor ingrese su contraseña!' },
+            ]}
           >
             <Input.Password />
           </Form.Item>
@@ -71,9 +76,11 @@ const Login = () => {
             <Button type='primary' htmlType='submit'>
               Submit
             </Button>
-            <a href='/register' style={{ marginLeft: '15px' }}>
-              Registrarme
-            </a>
+            <div className='to-register'>
+              <a href='/registerStudent'>Registrarme como estudiante</a>
+              <br />
+              <a href='/registerrecruiter'>Registrarme como recruiter</a>
+            </div>
           </Form.Item>
         </Form>
       </Card>
