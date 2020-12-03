@@ -5,12 +5,14 @@ import './styles.css';
 import logo from '../../assets/OneChance.png';
 import { Input } from 'antd';
 import { logout } from '../../redux';
+import { useHistory } from 'react-router-dom';
 
 const { Header } = Layout;
 const { Option } = Select;
 
 const MainHeader = () => {
   const dispatch = useDispatch()
+  const history = useHistory()
   return (
     <Header className='header'>
       <div className='logo'>
@@ -34,10 +36,12 @@ const MainHeader = () => {
           width: '90%',
         }}
       >
-        <h1>Menu</h1>
-        <h1>Menu</h1>
-        {/* <h1 onClick={dispatch(logout())}>Cerrar Sesion</h1> */}
-        <Button className="logout" onClick={()=> dispatch(logout())}>Cerrar Session</Button>
+        <Button type="text" onClick={()=> history.push('/')}>Principal</Button>
+        <Button type="text" onClick={()=> history.push('/perfil')}>Perfil</Button>
+        <Button className="logout" onClick={()=> {
+          dispatch(logout())
+          history.push('/');
+          }}>Cerrar Session</Button>
       </div>
     </Header>
   );

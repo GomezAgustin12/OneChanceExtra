@@ -42,4 +42,6 @@ h2 {
 
 .ant-card-body {
   width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }

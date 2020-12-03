@@ -6,7 +6,7 @@ import AppLayout from './views/layout';
 import { Loader } from './components';
 import { Login, Registerrecruiter, RegisterStudent } from './views';
 import { recruiterHome } from './views/recruitersViews';
-import { StudentHome } from './views/StudentsViews';
+import { StudentHome, StudentProfile } from './views/StudentsViews';
 import { decodeUser } from './utils';
 import { fetchUsersRequest, logedin } from './redux';
 import axios from 'axios';
@@ -59,11 +59,16 @@ const AppRoutes = () => {
           <AppLayout>
             {user.AppRole === 'recruiter' && (
               <>
+                <div>Soy Recluter</div>
                 <Route exact path='/' component={recruiterHome} />
               </>
             )}
             {user.AppRole === 'student' && (
-              <Route exact path='/' component={StudentHome} />
+              <>
+                <div>Soy Estudiante</div>
+                <Route exact path='/' component={StudentHome} />
+                <Route exact path='/perfil' component={StudentProfile} />
+              </>
             )}
           </AppLayout>
         )}

@@ -1,4 +1,4 @@
 .site-layout {
+  place-items: center;
   min-height: 100vh;
-  /* margin-left: 200px; */
 }
