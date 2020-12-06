@@ -2,11 +2,18 @@ import React, { Suspense, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import AppLayout from './views/layout';
 import { Loader } from './components';
 import { Login, Registerrecruiter, RegisterStudent } from './views';
-import { recruiterHome } from './views/recruitersViews';
-import { StudentHome, StudentProfile } from './views/StudentsViews';
+import {
+  MyPosts,
+  RecruiterHome,
+  RecruiterLayout,
+} from './views/recruitersViews';
+import {
+  StudentHome,
+  StudentProfile,
+  StudentLayout,
+} from './views/StudentsViews';
 import { decodeUser } from './utils';
 import { fetchUsersRequest, logedin } from './redux';
 import axios from 'axios';
@@ -40,7 +47,7 @@ const AppRoutes = () => {
         });
       }
     });
-  }, [isLogin, dispatch]);
+  }, []);
 
   return (
     <Router>
@@ -56,21 +63,20 @@ const AppRoutes = () => {
             />
           </>
         ) : (
-          <AppLayout>
+          <>
             {user.AppRole === 'recruiter' && (
-              <>
-                <div>Soy Recluter</div>
-                <Route exact path='/' component={recruiterHome} />
-              </>
+              <RecruiterLayout>
+                <Route exact path='/' component={RecruiterHome} />
+                <Route exact path='/myposts' component={MyPosts} />
+              </RecruiterLayout>
             )}
             {user.AppRole === 'student' && (
-              <>
-                <div>Soy Estudiante</div>
+              <StudentLayout>
                 <Route exact path='/' component={StudentHome} />
                 <Route exact path='/perfil' component={StudentProfile} />
-              </>
+              </StudentLayout>
             )}
-          </AppLayout>
+          </>
         )}
       </Suspense>
     </Router>

@@ -1,0 +1,10 @@
+.student-container {
+  margin-bottom: 20px;
+}
+.ant-card .student-card {
+  margin-bottom: 20px;
+}
+
+.student-card p {
+  text-align: justify;
+}

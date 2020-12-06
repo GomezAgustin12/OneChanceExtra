@@ -25,3 +25,101 @@ export const provincias = [
   'Tierra del Fuego',
   'Tucumán',
 ];
+export const formItemLayout = {
+  labelCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 5,
+    },
+  },
+  wrapperCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 12,
+    },
+  },
+};
+
+export const universities = {
+  'Buenos Aires': [
+    ' Universidad de Buenos Aires (UBA) - CBC',
+    ' Universidad de Buenos Aires (UBA) ',
+    'Universidad de la Defensa Nacional',
+    ' Universidad Tecnológica Nacional (UTN) (Medrano)',
+    'Universidad Nacional Arturo Jauretche',
+    'Instituto Universitario de la Policía Federal Argentina (IUPFA)',
+    'Facultad Latinoamericana de Ciencias Sociales (FLACSO)',
+    'Universidad Austral',
+    'Universidad Favaloro',
+    ' Universidad de Palermo (UP)',
+    'Universidad de San Andrés (UDESA)',
+    'Instituto Tecnológico Buenos Aires (ITBA)',
+  ],
+  Catamarca: ['Universidad Nac. de Catamarca (UNCA)'],
+  Chaco: [
+    ' Universidad Nacional del Nordeste (UNNE)',
+    ' Universidad Nacional del Chaco Austral (UNCAUS)',
+    'Universidad Tecnológica Nacional (UTN)',
+    ' Universidad de Ciencias Empresariales y Sociales (UCES)',
+    'Universidad de la Cuenca del Plata',
+  ],
+  Chubut: [
+    'Univ. Nacional del Comahue (UNCOMA)',
+    'Univ. N. de la Patagonia San Juan Bosco (UNP)',
+    'Universidad Tecnológica Nacional (UTN) ',
+    'Universidad de Flores (UFLO) ',
+  ],
+  Córdoba: [
+    'Universidad Nacional de Córdoba (UNC)',
+    'Universidad Nacional de Río Cuarto (UNRC) ',
+    ' Universidad Nacional de Villa María (UNVM)',
+    'Instituto Universitario Aeronáutico (IUA) ',
+    ' Universidad Tecnológica Nacional (UTN)',
+    'Universidad Blas Pascal (UBP) ',
+    'Universidad Católica de Córdoba (UCC) ',
+    'Universidad Empresarial Siglo XXI (UES) ',
+    'Universidad Provincial de Córdoba ',
+    'Universidad de Ciencias Empresariales y Sociales (UCES)',
+    'Universidad de Belgrano (UB) ',
+  ],
+  Corrientes: [
+    'Universidad de la Cuenca del Plata',
+    'Universidad del Salvador (USAL) ',
+    'Instituto Universitario de Cs. de la Salud Fundación',
+    'Barceló (FB)',
+    'Universidad Nacional del Nordeste (UNNE)',
+  ],
+  'Entre Ríos': [
+    'Universidad Autónoma de Entre Ríos (UADER)',
+    'Universidad Nacional de Entre Ríos (UNER)',
+    'Univ. Nac. de Concepción del Uruguay (UCU)',
+    'Universidad Tecnológica Nacional (UTN) ',
+    'Universidad Adventista del Plata (UAPAR)',
+    'Universidad Católica Argentina (UCA)',
+  ],
+  Formosa: [
+    'Universidad Nacional de Formosa (UNF)',
+    'Universidad de la Cuenca del Plata ',
+  ],
+  Jujuy: ['Universidad Nacional de Jujuy (UNJU)'],
+  'La Pampa': ['Universidad Nacional de La Pampa (UNLPAM)'],
+  'La Rioja': [
+    'Universidad Nacional de La Rioja (UNLAR)',
+    'Universidad Nacional de Chilecito (UNDEC)',
+    ' Universidad Tecnológica Nacional (UTN)',
+  ],
+  Mendoza: [
+    'Universidad Nacional de Cuyo (UNCU)',
+    'Universidad Tecnológica Nacional (UTN) ',
+    'Universidad de Mendoza (UM)',
+    'Universidad Juan Agustín Maza (UMAZA)',
+    'Universidad de Congreso',
+    'Universidad del Aconcagua (UDA)',
+    'Universidad Champagnat',
+    'Universidad Católica Argentina (UCA)',
+  ],
+};

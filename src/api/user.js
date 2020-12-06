@@ -2,7 +2,7 @@ import axios from 'axios';
 import { url } from '../const';
 // const token = localStorage.getItem('token');
 
-export const fetchUser = async () => {
+export const fetchUsers = async () => {
   try {
     const res = await axios.get(`${url}/users`);
     return res.data;
@@ -31,9 +31,9 @@ export const postUser = async data => {
   }
 };
 
-export const patchUser = async (data, User_id) => {
+export const putUser = async (data, user_id) => {
   try {
-    const res = await axios.patch(`${url}/users/${User_id}`, data);
+    const res = await axios.put(`${url}/users/${user_id}`, data);
     return res.data;
   } catch (error) {
     console.error(error);

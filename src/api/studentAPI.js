@@ -24,3 +24,21 @@ export const postStudent = async data => {
     console.error(error.message);
   }
 };
+
+export const putStudent = async (student_id, data) => {
+  try {
+    const res = await axios.put(`${url}/estudiantes/${student_id}`, data);
+    return res.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deleteStudent = async id => {
+  try {
+    const res = await axios.delete(`${url}/estudiantes/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
