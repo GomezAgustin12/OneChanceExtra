@@ -8,7 +8,7 @@ const RecruiterHome = () => {
   useEffect(() => {
     fetchStudents().then(res => setStudents(res));
   }, []);
-  console.log(students);
+
   return (
     <>
       {students.map(student => (

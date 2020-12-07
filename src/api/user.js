@@ -11,10 +11,18 @@ export const fetchUsers = async () => {
   }
 };
 
-export const fetchOneUser = async _id => {
+export const fetchOneUser = async id => {
   try {
-    const res = await axios.get(`${url}
-    ​/users-permissions​/search​${_id}`);
+    const res = await axios.get(`${url}​/users-permissions/search/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const fetchOneUser2 = async id => {
+  try {
+    const res = await axios.get(`${url}/estudiantes/${id}`);
     return res.data;
   } catch (error) {
     console.error(error);

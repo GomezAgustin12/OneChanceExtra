@@ -1,7 +1,6 @@
 import React, { Suspense, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-
 import { Loader } from './components';
 import { Login, Registerrecruiter, RegisterStudent } from './views';
 import {

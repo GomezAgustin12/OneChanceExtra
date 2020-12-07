@@ -16,12 +16,6 @@ const RecruiterLayout = props => {
   const history = useHistory();
 
   const [opt, setOpt] = useState('Provincia');
-  const [prov, setProv] = useState([]);
-
-  useEffect(() => {
-    const keys = Object.keys(universities);
-    setProv(keys);
-  }, []);
 
   const onChange = value => {
     console.log(value);
@@ -50,9 +44,9 @@ const RecruiterLayout = props => {
             {opt === 'Universidad' && (
               <>
                 <Select style={{ width: 450 }} placeholder='Elegir Universidad'>
-                  {prov.map(provincia => (
-                    <OptGroup label={provincia}>
-                      {universities[provincia].map(university => (
+                  {universities.map(e => (
+                    <OptGroup label={e.provincia}>
+                      {e.universidades.map(university => (
                         <>
                           <Option value={university}>{university}</Option>
                         </>
