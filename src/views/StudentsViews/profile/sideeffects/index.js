@@ -1,4 +1,5 @@
 import * as experienceService from '../../../../api/experience';
+import * as educationService from '../../../../api/education';
 import {
 	updateUserData,
 	updateUserDataError,
@@ -20,6 +21,22 @@ export const addExperience = async (user = {}, values = {}) => {
 
 export const removeExperience = async (id) => {
 	return await experienceService.removeExperience(id);
+};
+
+export const addEducation = async (user = {}, values = {}) => {
+	const isNewEducation = values.id;
+	const educationData = {
+		...values,
+		estudiante: user.id,
+	};
+	if (isNewEducation) {
+		return await educationService.editEducation(values.id, educationData);
+	}
+	return await educationService.addEducation(educationData);
+};
+
+export const removeEducation = async (id) => {
+	return await educationService.removeEducation(id);
 };
 
 export const resetView = async (id, dispatch) => {

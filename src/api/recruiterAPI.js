@@ -4,12 +4,16 @@ const token = localStorage.getItem('token');
 
 export const fetchRecruiters = async () => {
   try {
-    const res = await axios.get(
-      `${url}/recluters`
-      //  {
-      //    headers: { Authorization: `Bearer ${token}` },
-      //  }
-    );
+    const res = await axios.get(`${url}/recluters`);
+    return res.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const fetchOneRecruiter = async user_id => {
+  try {
+    const res = await axios.get(`${url}/recluters/${user_id}`);
     return res.data;
   } catch (error) {
     console.error(error);
