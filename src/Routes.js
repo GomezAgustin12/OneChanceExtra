@@ -7,6 +7,7 @@ import {
   MyPosts,
   RecruiterHome,
   RecruiterLayout,
+  RecruiterProfile,
 } from './views/recruitersViews';
 import {
   StudentHome,
@@ -67,6 +68,7 @@ const AppRoutes = () => {
               <RecruiterLayout>
                 <Route exact path='/' component={RecruiterHome} />
                 <Route exact path='/myposts' component={MyPosts} />
+                <Route exact path='/perfil' component={RecruiterProfile} />
               </RecruiterLayout>
             )}
             {user.AppRole === 'student' && (

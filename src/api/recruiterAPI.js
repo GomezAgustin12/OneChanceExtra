@@ -28,3 +28,12 @@ export const postRecruiter = async data => {
     console.error(error.message);
   }
 };
+
+export const putRecruiter = async (recruiter_id, data) => {
+  try {
+    const res = await axios.put(`${url}/recluters/${recruiter_id}`, data);
+    return res.data;
+  } catch (error) {
+    console.error(error);
+  }
+};

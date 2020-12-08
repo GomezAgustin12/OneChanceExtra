@@ -1,4 +1,5 @@
 import { Card } from 'antd';
+
 import React, { useEffect, useState } from 'react';
 import { fetchOfertas } from '../../../api';
 
@@ -8,7 +9,7 @@ const StudentHome = () => {
   useEffect(() => {
     fetchOfertas().then(res => setOfertas(res));
   }, []);
-  console.log(ofertas);
+
   return (
     <>
       {ofertas.map(oferta => (

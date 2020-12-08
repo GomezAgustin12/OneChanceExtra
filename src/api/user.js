@@ -13,7 +13,7 @@ export const fetchUsers = async () => {
 
 export const fetchOneUser = async id => {
   try {
-    const res = await axios.get(`${url}​/users-permissions/search/${id}`);
+    const res = await axios.get(`${url}​/users/${id}`);
     return res.data;
   } catch (error) {
     console.error(error);

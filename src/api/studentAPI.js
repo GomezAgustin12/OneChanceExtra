@@ -4,16 +4,16 @@ const token = localStorage.getItem('token');
 
 export const fetchStudents = async () => {
   try {
-    const res = await axios.get(
-      `${url}/estudiantes`
-      //  {
-      //    headers: { Authorization: `Bearer ${token}` },
-      //  }
-    );
+    const res = await axios.get(`${url}/estudiantes`);
     return res.data;
   } catch (error) {
     console.error(error);
   }
+};
+
+export const fetchOneStudent = async student_id => {
+  const res = await axios(`${url}/estudiantes/${student_id}`);
+  return res.data;
 };
 
 export const postStudent = async data => {

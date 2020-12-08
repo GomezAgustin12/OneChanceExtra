@@ -5,7 +5,7 @@ import {
   updateUserDataError,
   updateUserDataSuccess,
 } from '../../../../redux/user/userActions';
-import { fetchOneUser2 } from '../../../../api/user';
+import { fetchOneRecruiter } from '../../../../api';
 
 export const addExperience = async (user = {}, values = {}) => {
   console.log('USER', user);
@@ -43,8 +43,9 @@ export const removeEducation = async id => {
 
 export const resetView = async (id, dispatch) => {
   dispatch(updateUserData());
+  console.log(id);
   try {
-    const user = await fetchOneUser2(id);
+    const user = await fetchOneRecruiter(id);
     dispatch(updateUserDataSuccess(user));
     return user;
   } catch (error) {

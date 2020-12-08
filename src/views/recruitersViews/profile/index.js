@@ -9,12 +9,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import './style.css';
 import Modal from 'antd/lib/modal/Modal';
-import {
-  fetchOneStudent,
-  fetchOneUser,
-  fetchOneUser2,
-  putStudent,
-} from '../../../api';
+import { fetchOneRecruiter, fetchOneUser, putRecruiter } from '../../../api';
 import 'dayjs/locale/es';
 import { Loader } from '../../../components';
 import { UpdateResumeForm } from '../../../components/forms';
@@ -60,7 +55,7 @@ const Profile = () => {
 
   useEffect(() => {
     // dispatch(fetchUsersRequest());
-    fetchOneStudent(user.id).then(res => {
+    fetchOneRecruiter(user.id).then(res => {
       dispatch(fetchUsersSuccess(res));
     });
     fetchOneUser(user.user.id).then(res => {
@@ -88,7 +83,7 @@ const Profile = () => {
 
   //---------------------------UPDATE SECTION--------------------------
   const updateResume = e => {
-    putStudent(user._id, e);
+    putRecruiter(user._id, e);
     handleUpdatePage();
   };
 
@@ -96,7 +91,7 @@ const Profile = () => {
   const onAddExperience = async values => {
     const response = await addExperience(user, values);
     if (response.statusText === 'OK') {
-      resetView(user._id, dispatch);
+      resetView(user.id, dispatch);
     }
     // Handle error code here ...
   };

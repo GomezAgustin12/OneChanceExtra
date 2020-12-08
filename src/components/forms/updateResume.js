@@ -1,13 +1,14 @@
 import { Form, Input } from 'antd';
 import React from 'react';
 
-const UpdateResumeForm = ({ form }) => (
+const UpdateResumeForm = ({ form, resumen }) => (
   <Form
     form={form}
     layout='vertical'
     name='form_in_modal'
     initialValues={{ modifier: 'public' }}
   >
+    {console.log(resumen)}
     <Form.Item
       name='Resumen'
       label='Resumen'
@@ -18,7 +19,7 @@ const UpdateResumeForm = ({ form }) => (
         },
       ]}
     >
-      <Input.TextArea />
+      <Input.TextArea defaultValue={resumen} />
     </Form.Item>
   </Form>
 );
