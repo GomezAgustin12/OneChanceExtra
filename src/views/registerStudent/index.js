@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Form,
   Input,
@@ -16,10 +16,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { postStudent, postUser } from '../../api';
 import { Loader } from '../../components';
 import { InboxOutlined } from '@ant-design/icons';
-import { provincias } from '../../const';
+import { provincias, universities } from '../../const';
 import { Option } from 'antd/lib/mentions';
+import Axios from 'axios';
 
 const { Content } = Layout;
+const { OptGroup } = Select;
 
 const layout = {
   labelCol: { span: 8 },
@@ -30,6 +32,8 @@ const tailLayout = {
 };
 
 const RegisterStudent = () => {
+  const [foto, setFoto] = useState();
+
   const onFinish = async values => {
     try {
       const { user } = await postUser({
@@ -38,8 +42,10 @@ const RegisterStudent = () => {
         username: values.username,
         email: values.email,
         password: values.password,
+        Provincia: values.Provincia,
         AppRole: 'student',
       });
+      uploadFoto(user.id);
       await postStudent({
         Facultad: values.university,
         user: user.id,
@@ -56,12 +62,23 @@ const RegisterStudent = () => {
     console.log('Failed:', errorInfo);
   };
 
-  const normFile = e => {
-    console.log('Upload event:', e);
-    if (Array.isArray(e)) {
-      return e;
+  const onChange = event => {
+    console.log(event.target.files[0]);
+    setFoto(event.target.files[0]);
+  };
+
+  const uploadFoto = async id => {
+    console.log(id);
+    try {
+      const fd = new FormData();
+      fd.append('formato', 'jpg');
+      fd.append('id', id);
+      fd.append('foto', foto);
+      const res = await Axios.post('http://18.230.70.184:3000/upload', fd);
+      console.log(res);
+    } catch (error) {
+      console.log(error.message);
     }
-    return e && e.fileList;
   };
 
   return (
@@ -118,10 +135,20 @@ const RegisterStudent = () => {
             name='university'
             rules={[{ required: true, message: 'Ingrese facultad' }]}
           >
-            <Input />
+            <Select placeholder='Elegir Universidad'>
+              {universities.map(e => (
+                <OptGroup label={e.provincia}>
+                  {e.universidades.map(university => (
+                    <>
+                      <Option value={university}>{university}</Option>
+                    </>
+                  ))}
+                </OptGroup>
+              ))}
+            </Select>
           </Form.Item>
           <Form.Item
-            name='provincia'
+            name='Provincia'
             label='Provincia'
             hasFeedback
             rules={[{ required: true, message: 'Ingrese su provincia' }]}
@@ -156,24 +183,20 @@ const RegisterStudent = () => {
             <DatePicker />
           </Form.Item> */}
           <Form.Item label='Foto de Perfil'>
-            <Form.Item
-              name='dragger'
-              valuePropName='fileList'
-              getValueFromEvent={normFile}
-              noStyle
-            >
-              <Upload.Dragger name='files' action='/upload.do'>
-                <p className='ant-upload-drag-icon'>
-                  <InboxOutlined />
-                </p>
-                <p className='ant-upload-text'>Click o arrastre una imagen</p>
-                <p className='ant-upload-hint'>Soporta una sola imagen</p>
-              </Upload.Dragger>
+            <Form.Item name='dragger' valuePropName='fileList' noStyle>
+              <div className='register-logo'>
+                <label title='Seleccione foto de perfil' />
+                <input
+                  type='file'
+                  placeholder='Foto de Perfil'
+                  onChange={onChange}
+                />
+              </div>
             </Form.Item>
           </Form.Item>
           <Form.Item {...tailLayout}>
             <Button type='primary' htmlType='submit'>
-              Submit
+              Registrarse
             </Button>
             <a href='/' style={{ marginLeft: '15px' }}>
               Atras

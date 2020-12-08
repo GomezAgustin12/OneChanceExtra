@@ -130,7 +130,7 @@ const Registerrecruiter = () => {
             <DatePicker />
           </Form.Item> */}
           <Form.Item
-            label='Password'
+            label='Contraseña'
             name='password'
             rules={[{ required: true, message: 'Ingrese Contraseña!' }]}
           >

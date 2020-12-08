@@ -52,7 +52,7 @@ const StudentLayout = props => {
                 history.push('/');
               }}
             >
-              Cerrar Session
+              Cerrar Sesion
             </Button>
           </div>
         </Header>

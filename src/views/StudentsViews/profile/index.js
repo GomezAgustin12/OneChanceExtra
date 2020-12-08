@@ -18,7 +18,6 @@ import {
 import 'dayjs/locale/es';
 import { Loader } from '../../../components';
 import { UpdateResumeForm } from '../../../components/forms';
-import fotoPerfil from '../../../assets/perfil.jpg';
 
 // Local components
 import {
@@ -40,13 +39,12 @@ import Axios from 'axios';
 import {
   fetchUsersRequest,
   fetchUsersSuccess,
+  updateUserData,
 } from '../../../redux/user/userActions';
 
 const Profile = () => {
   const dispatch = useDispatch();
   const { user, loading } = useSelector(state => state.user);
-
-  console.log(user);
 
   const [experienceModal, setExperienceModal] = useState(false);
   const [educacionModal, setEducacionModal] = useState(false);
@@ -59,7 +57,7 @@ const Profile = () => {
   const [form] = Form.useForm();
 
   useEffect(() => {
-    // dispatch(fetchUsersRequest());
+    console.log('ENTRE');
     fetchOneStudent(user.id).then(res => {
       dispatch(fetchUsersSuccess(res));
     });
@@ -132,11 +130,14 @@ const Profile = () => {
 
   const onSubmit = async () => {
     try {
+      dispatch(updateUserData());
       const fd = new FormData();
       fd.append('formato', 'jpg');
-      fd.append('id', user.id);
+      fd.append('id', user.user.id);
       fd.append('foto', foto);
       const res = await Axios.post('http://18.230.70.184:3000/upload', fd);
+      handleUpdatePage();
+
       console.log(res);
     } catch (error) {
       console.log(error.message);
@@ -149,9 +150,10 @@ const Profile = () => {
       {/* ------------------DATOS PERSONALES--------------------- */}
       <Card size='small' className='profile-data'>
         <img
+          key={user.user.id}
           className='profile-image'
-          src={`https://onechancebucket.s3-sa-east-1.amazonaws.com/FotoPerfil/${user.id}.jpg`}
-          alt={fotoPerfil}
+          src={`https://onechancebucket.s3-sa-east-1.amazonaws.com/FotoPerfil/${user.user.id}.jpg`}
+          alt='fotoPerfil'
           onClick={handleFotoModal}
           style={{ width: 180, height: 180 }}
         />
@@ -256,6 +258,7 @@ const Profile = () => {
             .then(values => {
               form.resetFields();
               onSubmit(values);
+              handleFotoModal();
             })
             .catch(info => {
               console.log('Validate Failed:', info);

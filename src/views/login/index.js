@@ -55,7 +55,7 @@ const Login = () => {
           onFinishFailed={onFinishFailed}
         >
           <Form.Item
-            label='Username'
+            label='Usuario'
             name='username'
             rules={[
               { required: true, message: 'Por favor ingrese su usuario!' },
@@ -64,7 +64,7 @@ const Login = () => {
             <Input />
           </Form.Item>
           <Form.Item
-            label='Password'
+            label='Contraseña'
             name='password'
             rules={[
               { required: true, message: 'Por favor ingrese su contraseña!' },
@@ -74,7 +74,7 @@ const Login = () => {
           </Form.Item>
           <Form.Item {...tailLayout}>
             <Button type='primary' htmlType='submit'>
-              Submit
+              Ingresar
             </Button>
             <div className='to-register'>
               <a href='/registerStudent'>Registrarme como estudiante</a>
