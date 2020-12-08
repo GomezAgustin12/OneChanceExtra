@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Form,
   Input,
@@ -8,6 +8,7 @@ import {
   Upload,
   DatePicker,
   TimePicker,
+  Select,
 } from 'antd';
 import './styles.css';
 import logo from '../../assets/OneChance.png';
@@ -15,6 +16,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { postRecruiter, postUser } from '../../api';
 import { Loader } from '../../components';
 import { InboxOutlined } from '@ant-design/icons';
+import Axios from 'axios';
+import { provincias } from '../../const';
 
 const { Content } = Layout;
 
@@ -26,7 +29,11 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
+const { Option } = Select;
+
 const Registerrecruiter = () => {
+  const [foto, setFoto] = useState();
+
   const onFinish = async values => {
     try {
       const { user } = await postUser({
@@ -35,8 +42,11 @@ const Registerrecruiter = () => {
         username: values.username,
         email: values.email,
         password: values.password,
+        Provincia: values.Provincia,
         AppRole: 'recruiter',
       });
+      console.log(user);
+      uploadFoto(user.id);
       await postRecruiter({ empresa: values.company, user: user.id });
     } catch (error) {
       console.log(error.message);
@@ -50,13 +60,24 @@ const Registerrecruiter = () => {
     console.log('Failed:', errorInfo);
   };
 
-  // const normFile = e => {
-  //   console.log('Upload event:', e);
-  //   if (Array.isArray(e)) {
-  //     return e;
-  //   }
-  //   return e && e.fileList;
-  // };
+  const onChange = event => {
+    console.log(event.target.files[0]);
+    setFoto(event.target.files[0]);
+  };
+
+  const uploadFoto = async id => {
+    console.log(id);
+    try {
+      const fd = new FormData();
+      fd.append('formato', 'jpg');
+      fd.append('id', id);
+      fd.append('foto', foto);
+      const res = await Axios.post('http://18.230.70.184:3000/upload', fd);
+      console.log(res);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <Content className='register-page-container'>
@@ -74,14 +95,14 @@ const Registerrecruiter = () => {
         >
           <Form.Item
             label='Nombre'
-            name='Nombre'
+            name='name'
             rules={[{ required: true, message: 'Ingrese nombre' }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             label='Apellido'
-            name='Apellido'
+            name='lastName'
             rules={[{ required: true, message: 'Ingrese apellido' }]}
           >
             <Input />
@@ -94,6 +115,13 @@ const Registerrecruiter = () => {
             <Input />
           </Form.Item>
           <Form.Item
+            label='Contraseña'
+            name='password'
+            rules={[{ required: true, message: 'Ingrese Contraseña!' }]}
+          >
+            <Input.Password />
+          </Form.Item>
+          <Form.Item
             label='Correo'
             name='email'
             rules={[{ required: true, message: 'Ingrese correo' }]}
@@ -103,58 +131,35 @@ const Registerrecruiter = () => {
           <Form.Item
             label='Empresa'
             name='company'
-            rules={[{ required: true, message: 'Ingrese universidad' }]}
+            rules={[{ required: true, message: 'Ingrese empresa' }]}
           >
             <Input />
           </Form.Item>
-          {/* <Form.Item
-            label='Fecha Inico'
-            name='fechaInicio'
-            extra='Ingrese la fecha en la que comenzo el cursado'
-            rules={[{ required: true, message: 'Ingrese Fecha de Inicio' }]}
-          >
-            <DatePicker />
-          </Form.Item>
           <Form.Item
-            label='Fecha Fin'
-            name='fechaFin'
-            extra='Fecha estimada de finalizacion de la carrera'
-            rules={[
-              {
-                type: 'object',
-                required: true,
-                message: 'Ingrese Fecha de Fin',
-              },
-            ]}
+            name='Provincia'
+            label='Provincia'
+            hasFeedback
+            rules={[{ required: true, message: 'Ingrese su provincia' }]}
           >
-            <DatePicker />
-          </Form.Item> */}
-          <Form.Item
-            label='Contraseña'
-            name='password'
-            rules={[{ required: true, message: 'Ingrese Contraseña!' }]}
-          >
-            <Input.Password />
+            <Select placeholder='Please select a country'>
+              {provincias.map(e => (
+                <Option value={e}>{e}</Option>
+              ))}
+            </Select>
           </Form.Item>
-          {/* <Form.Item label='Foto de Perfil'>
-            <Form.Item
-              name='dragger'
-              valuePropName='fileList'
-              getValueFromEvent={normFile}
-              noStyle
-            >
-              <Upload.Dragger name='files' action='/upload.do'>
-                <p className='ant-upload-drag-icon'>
-                  <InboxOutlined />
-                </p>
-                <p className='ant-upload-text'>Click o arrastre una imagen</p>
-                <p className='ant-upload-hint'>Soporta una sola imagen</p>
-              </Upload.Dragger>
-            </Form.Item>
-          </Form.Item> */}
+          <Form.Item label='Foto de Perfil'>
+            <div className='register-logo'>
+              <label title='Seleccione foto de perfil' />
+              <input
+                type='file'
+                placeholder='Foto de Perfil'
+                onChange={onChange}
+              />
+            </div>
+          </Form.Item>
           <Form.Item {...tailLayout}>
             <Button type='primary' htmlType='submit'>
-              Submit
+              Registrarme
             </Button>
             <a href='/' style={{ marginLeft: '15px' }}>
               Atras

@@ -11,7 +11,7 @@ import './style.css';
 import Modal from 'antd/lib/modal/Modal';
 import { fetchOneRecruiter, fetchOneUser, putRecruiter } from '../../../api';
 import 'dayjs/locale/es';
-import { Loader } from '../../../components';
+import { DatosPersonales, Loader } from '../../../components';
 import { UpdateResumeForm } from '../../../components/forms';
 import fotoPerfil from '../../../assets/perfil.jpg';
 
@@ -35,6 +35,7 @@ import Axios from 'axios';
 import {
   fetchUsersRequest,
   fetchUsersSuccess,
+  updateUserData,
 } from '../../../redux/user/userActions';
 
 const Profile = () => {
@@ -82,8 +83,9 @@ const Profile = () => {
   const handleUpdatePage = () => setUpdatePage(!updatePage);
 
   //---------------------------UPDATE SECTION--------------------------
-  const updateResume = e => {
-    putRecruiter(user._id, e);
+  const updateResume = async e => {
+    dispatch(updateUserData());
+    await putRecruiter(user._id, e);
     handleUpdatePage();
   };
 
@@ -142,23 +144,7 @@ const Profile = () => {
     <>
       {loading && <Loader />}
       {/* ------------------DATOS PERSONALES--------------------- */}
-      <Card size='small' className='profile-data'>
-        <img
-          className='profile-image'
-          src={`https://onechancebucket.s3-sa-east-1.amazonaws.com/FotoPerfil/${user.id}.jpg`}
-          alt={fotoPerfil}
-          onClick={handleFotoModal}
-          style={{ width: 180, height: 180 }}
-        />
-
-        <div style={{ justifySelf: 'end' }} className='exp-card-actions'></div>
-        <div className='profile-personal'>
-          <h1>{`${user.user.nombre} ${user.user.apellido}`}</h1>
-
-          <p>{user.Facultad}</p>
-          <p>{user.user.Provincia}, Argentina</p>
-        </div>
-      </Card>
+      <DatosPersonales user={user} handleFotoModal={handleFotoModal} />
       {/* ---------------------------RESUMEN--------------------------- */}
       <Card className='profile-resume'>
         <div className='exp-card-actions'>

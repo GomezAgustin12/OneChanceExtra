@@ -43,11 +43,15 @@ const RegisterStudent = () => {
         email: values.email,
         password: values.password,
         Provincia: values.Provincia,
+
         AppRole: 'student',
       });
       uploadFoto(user.id);
       await postStudent({
         Facultad: values.university,
+        Carrera: values.Carrera,
+        FechaInicio: values.FechaInicio,
+        FechaFin: values.FechaFin,
         user: user.id,
       });
     } catch (error) {
@@ -148,6 +152,35 @@ const RegisterStudent = () => {
             </Select>
           </Form.Item>
           <Form.Item
+            label='Carrera'
+            name='Carrera'
+            rules={[{ required: true, message: 'Ingrese una carrera' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label='Fecha Inico'
+            name='FechaInicio'
+            extra='Ingrese la fecha en la que comenzo el cursado'
+            rules={[{ required: true, message: 'Ingrese Fecha de Inicio' }]}
+          >
+            <DatePicker />
+          </Form.Item>
+          <Form.Item
+            label='Fecha Fin'
+            name='FechaFin'
+            extra='Fecha estimada de finalizacion de la carrera'
+            rules={[
+              {
+                type: 'object',
+                required: true,
+                message: 'Ingrese Fecha de Fin',
+              },
+            ]}
+          >
+            <DatePicker />
+          </Form.Item>
+          <Form.Item
             name='Provincia'
             label='Provincia'
             hasFeedback
@@ -160,39 +193,15 @@ const RegisterStudent = () => {
             </Select>
           </Form.Item>
 
-          {/* <Form.Item
-            label='Fecha Inico'
-            name='fechaInicio'
-            extra='Ingrese la fecha en la que comenzo el cursado'
-            rules={[{ required: true, message: 'Ingrese Fecha de Inicio' }]}
-          >
-            <DatePicker />
-          </Form.Item>
-          <Form.Item
-            label='Fecha Fin'
-            name='fechaFin'
-            extra='Fecha estimada de finalizacion de la carrera'
-            rules={[
-              {
-                type: 'object',
-                required: true,
-                message: 'Ingrese Fecha de Fin',
-              },
-            ]}
-          >
-            <DatePicker />
-          </Form.Item> */}
           <Form.Item label='Foto de Perfil'>
-            <Form.Item name='dragger' valuePropName='fileList' noStyle>
-              <div className='register-logo'>
-                <label title='Seleccione foto de perfil' />
-                <input
-                  type='file'
-                  placeholder='Foto de Perfil'
-                  onChange={onChange}
-                />
-              </div>
-            </Form.Item>
+            <div className='register-logo'>
+              <label title='Seleccione foto de perfil' />
+              <input
+                type='file'
+                placeholder='Foto de Perfil'
+                onChange={onChange}
+              />
+            </div>
           </Form.Item>
           <Form.Item {...tailLayout}>
             <Button type='primary' htmlType='submit'>
