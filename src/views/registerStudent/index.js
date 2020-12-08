@@ -8,6 +8,7 @@ import {
   Upload,
   DatePicker,
   TimePicker,
+  Select,
 } from 'antd';
 import './styles.css';
 import logo from '../../assets/OneChance.png';
@@ -15,6 +16,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { postStudent, postUser } from '../../api';
 import { Loader } from '../../components';
 import { InboxOutlined } from '@ant-design/icons';
+import { provincias } from '../../const';
+import { Option } from 'antd/lib/mentions';
 
 const { Content } = Layout;
 
@@ -53,13 +56,13 @@ const RegisterStudent = () => {
     console.log('Failed:', errorInfo);
   };
 
-  // const normFile = e => {
-  //   console.log('Upload event:', e);
-  //   if (Array.isArray(e)) {
-  //     return e;
-  //   }
-  //   return e && e.fileList;
-  // };
+  const normFile = e => {
+    console.log('Upload event:', e);
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e && e.fileList;
+  };
 
   return (
     <Content className='register-page-container'>
@@ -97,6 +100,13 @@ const RegisterStudent = () => {
             <Input />
           </Form.Item>
           <Form.Item
+            label='Password'
+            name='password'
+            rules={[{ required: true, message: 'Ingrese Contraseña!' }]}
+          >
+            <Input.Password />
+          </Form.Item>
+          <Form.Item
             label='Correo'
             name='email'
             rules={[{ required: true, message: 'Ingrese correo' }]}
@@ -110,6 +120,19 @@ const RegisterStudent = () => {
           >
             <Input />
           </Form.Item>
+          <Form.Item
+            name='provincia'
+            label='Provincia'
+            hasFeedback
+            rules={[{ required: true, message: 'Ingrese su provincia' }]}
+          >
+            <Select placeholder='Please select a country'>
+              {provincias.map(e => (
+                <Option value={e}>{e}</Option>
+              ))}
+            </Select>
+          </Form.Item>
+
           {/* <Form.Item
             label='Fecha Inico'
             name='fechaInicio'
@@ -132,14 +155,7 @@ const RegisterStudent = () => {
           >
             <DatePicker />
           </Form.Item> */}
-          <Form.Item
-            label='Password'
-            name='password'
-            rules={[{ required: true, message: 'Ingrese Contraseña!' }]}
-          >
-            <Input.Password />
-          </Form.Item>
-          {/* <Form.Item label='Foto de Perfil'>
+          <Form.Item label='Foto de Perfil'>
             <Form.Item
               name='dragger'
               valuePropName='fileList'
@@ -154,7 +170,7 @@ const RegisterStudent = () => {
                 <p className='ant-upload-hint'>Soporta una sola imagen</p>
               </Upload.Dragger>
             </Form.Item>
-          </Form.Item> */}
+          </Form.Item>
           <Form.Item {...tailLayout}>
             <Button type='primary' htmlType='submit'>
               Submit
