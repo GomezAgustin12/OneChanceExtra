@@ -1,21 +1,10 @@
 import React, { useState } from 'react';
-import {
-  Form,
-  Input,
-  Button,
-  Card,
-  Layout,
-  Upload,
-  DatePicker,
-  TimePicker,
-  Select,
-} from 'antd';
+import { Form, Input, Button, Card, Layout, Select, notification } from 'antd';
 import './styles.css';
 import logo from '../../assets/OneChance.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { postRecruiter, postUser } from '../../api';
 import { Loader } from '../../components';
-import { InboxOutlined } from '@ant-design/icons';
 import Axios from 'axios';
 import { provincias } from '../../const';
 
@@ -33,6 +22,7 @@ const { Option } = Select;
 
 const Registerrecruiter = () => {
   const [foto, setFoto] = useState();
+  const [form] = Form.useForm();
 
   const onFinish = async values => {
     try {
@@ -47,7 +37,10 @@ const Registerrecruiter = () => {
       });
       console.log(user);
       uploadFoto(user.id);
+
       await postRecruiter({ empresa: values.company, user: user.id });
+      form.resetFields();
+      notification.success({ message: 'Usuario registrado' });
     } catch (error) {
       console.log(error.message);
     }
@@ -57,6 +50,7 @@ const Registerrecruiter = () => {
   const { loading } = useSelector(state => state.user);
 
   const onFinishFailed = errorInfo => {
+    notification.error({ message: 'Error' });
     console.log('Failed:', errorInfo);
   };
 
@@ -82,11 +76,12 @@ const Registerrecruiter = () => {
   return (
     <Content className='register-page-container'>
       {loading && <Loader />}
-      <Card className='register-form-container'>
+      <Card bordered={false} className='register-form-container'>
         <div className='register-logo'>
           <img src={logo} alt='logo' />
         </div>
         <Form
+          form={form}
           {...layout}
           name='basic'
           initialValues={{ remember: true }}

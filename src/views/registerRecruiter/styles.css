@@ -28,14 +28,9 @@ h2 {
   margin: 10px 10px 50px 10px;
 }
 
-@media screen and (max-width: 425px) {
-  .register-form {
-    width: 80%;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .register-form {
-    width: 70%;
+@media screen and (max-width: 800px) {
+  .register-form-container {
+    width: 100vw;
+    height: 100vh;
   }
 }

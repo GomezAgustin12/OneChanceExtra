@@ -32,20 +32,34 @@ h2 {
   margin: 10px 10px 50px 10px;
 }
 
-@media screen and (max-width: 425px) {
+/* @media screen and (max-width: 425px) {
   .login-form {
     width: 80%;
   }
-}
+} */
 
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
   .login-form {
-    width: 70%;
+    width: 100%;
   }
-}
+} */
 
 .to-register {
   display: flex;
   flex-direction: column;
   text-align: right;
+}
+
+@media screen and (max-width: 800px) {
+  .login-form-container {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .to-register {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
 }

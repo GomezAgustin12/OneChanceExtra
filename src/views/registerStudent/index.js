@@ -5,17 +5,15 @@ import {
   Button,
   Card,
   Layout,
-  Upload,
   DatePicker,
-  TimePicker,
   Select,
+  notification,
 } from 'antd';
 import './styles.css';
 import logo from '../../assets/OneChance.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { postStudent, postUser } from '../../api';
 import { Loader } from '../../components';
-import { InboxOutlined } from '@ant-design/icons';
 import { provincias, universities } from '../../const';
 import { Option } from 'antd/lib/mentions';
 import Axios from 'axios';
@@ -33,6 +31,7 @@ const tailLayout = {
 
 const RegisterStudent = () => {
   const [foto, setFoto] = useState();
+  const [form] = Form.useForm();
 
   const onFinish = async values => {
     try {
@@ -54,6 +53,8 @@ const RegisterStudent = () => {
         FechaFin: values.FechaFin,
         user: user.id,
       });
+      form.resetFields();
+      notification.success({ message: 'Usuario registrado' });
     } catch (error) {
       console.log(error.message);
     }
@@ -88,7 +89,7 @@ const RegisterStudent = () => {
   return (
     <Content className='register-page-container'>
       {loading && <Loader />}
-      <Card className='register-form-container'>
+      <Card bordered={false} className='register-form-container'>
         <div className='register-logo'>
           <img src={logo} alt='logo' />
         </div>

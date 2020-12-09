@@ -43,7 +43,7 @@ const Login = () => {
     <Content className='login-page-container'>
       {loading && <Loader />}
 
-      <Card className='login-form-container'>
+      <Card bordered={false} className='login-form-container'>
         <div className='login-logo'>
           <img src={logo} alt='logo' />
         </div>
